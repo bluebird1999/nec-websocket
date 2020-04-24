@@ -23,7 +23,7 @@ public class SessionManager {
 	private Map<String, WebSocketSession> session = new HashMap<String, WebSocketSession>();
 	private Map<String, DataRules> rules = new HashMap<String, DataRules>();
     private EventMessage msg = null;
-    private Map<String,EventStatusMessage> statusMap = null;
+    private Map<Integer,EventStatusMessage> statusMap = null;
     private int complicatedSearch = 0;
     
 	private SessionManager() {
@@ -87,10 +87,10 @@ public class SessionManager {
 				if ( dr.getFactory().equals(msg.getStation().substring(0, 4).trim() ) ) { 
 					//search for the available data
 					if ( dr.getCodesList()!= null )	{							
-						List<String> codes = dr.getCodesList();
+						List<Integer> codes = dr.getCodesList();
 	 					if( complicatedSearch == 0 )
 							reBuildMsgMap(esm);
-						for(String st: codes) {
+						for(Integer st: codes) {
 							if( statusMap.containsKey(st) ) {
 								newEsm.add( statusMap.get(st));
 								logger.info("find this code=" + st);
@@ -149,7 +149,7 @@ public class SessionManager {
 	}	
 	
 	public void reBuildMsgMap( List<EventStatusMessage> esm) {
-		statusMap = new HashMap<String,EventStatusMessage>();
+		statusMap = new HashMap<Integer,EventStatusMessage>();
 		for(EventStatusMessage obj : esm) {
 			statusMap.put(obj.getAttributeId(), obj);
 		}

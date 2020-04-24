@@ -16,7 +16,7 @@ public class EventMessage implements Serializable {
 	private String dataBatchId;
 	private String station;
 	private String device;	
-	private String dataBlock;
+	private int dataBlock;
 	private Timestamp decodedTime;
 	private Timestamp sampleTime;
 	private List<EventStatusMessage> statusList;
@@ -39,10 +39,10 @@ public class EventMessage implements Serializable {
 	public void setDevice(String device) {
 		this.device = device;
 	}
-	public String getDataBlock() {
+	public int getDataBlock() {
 		return dataBlock;
 	}
-	public void setDataBlock(String dataBlock) {
+	public void setDataBlock(int dataBlock) {
 		this.dataBlock = dataBlock;
 	}	
 	public Timestamp getDecodedTime() {
@@ -92,7 +92,7 @@ public class EventMessage implements Serializable {
 		this.sampleTime = StaticMethod.getTimestamp(json.getString("sample_time"));
 		this.decodedTime = StaticMethod.getTimestamp(json.getString("decoded_time"));
 		this.device = json.getString("device");
-		this.dataBlock = json.getString("data_block");			
+		this.dataBlock = json.getIntValue("data_block");			
 		this.station = json.getString("station");
 		
 		JSONArray statusArray = json.getJSONArray("data");
@@ -101,7 +101,7 @@ public class EventMessage implements Serializable {
 		EventStatusMessage obj = null;
 		for(int i = 0; i < statusArray.size(); i++) {
 			statusJson = statusArray.getJSONObject(i);
-			obj = new EventStatusMessage(dataBatchId, statusJson.getString("code"), statusJson.getString("value"));
+			obj = new EventStatusMessage(dataBatchId, statusJson.getIntValue("code"), statusJson.getString("value"));
 			statusList.add(obj);
 		}
 	}

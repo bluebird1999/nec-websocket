@@ -18,8 +18,8 @@ public class DataRules implements Serializable {
 	private String factory;	
 	private String station;
 	private String device;	
-	private String dataBlock;
-	private List<String> codesList;
+	private int dataBlock;
+	private List<Integer> codesList;
 
 	public String getOperate() {
 		return operate;
@@ -51,16 +51,16 @@ public class DataRules implements Serializable {
 	public void setDevice(String device) {
 		this.device = device;
 	}
-	public String getDataBlock() {
+	public int getDataBlock() {
 		return dataBlock;
 	}
-	public void setDataBlock(String dataBlock) {
+	public void setDataBlock(int dataBlock) {
 		this.dataBlock = dataBlock;
 	}	
-	public List<String> getCodesList() {
+	public List<Integer> getCodesList() {
 		return codesList;
 	}
-	public void setCodesList(List<String> codesList) {
+	public void setCodesList(List<Integer> codesList) {
 		this.codesList = codesList;
 	}
 	
@@ -75,8 +75,8 @@ public class DataRules implements Serializable {
 				+ ", factory=" + factory
 				+ "]\n";
 		
-		for(String codesMessage : codesList) {
-			str = str + codesMessage + "\n";
+		for(Integer codesMessage : codesList) {
+			str = str + String.valueOf(codesMessage) + "\n";
 		}
 		
 		return str;
@@ -94,7 +94,7 @@ public class DataRules implements Serializable {
 			if( json.containsKey("device"))
 				this.device = json.getString("device");
 			if( json.containsKey("data_block"))
-				this.dataBlock = json.getString("data_block");
+				this.dataBlock = json.getIntValue("data_block");
 			if( json.containsKey("station"))
 				this.station = json.getString("station");
 			if( json.containsKey("factory"))
@@ -105,10 +105,10 @@ public class DataRules implements Serializable {
 			{
 				if( !json.getJSONArray("data").equals(null) ) {
 					JSONArray statusArray = json.getJSONArray("data");
-					codesList = new ArrayList<String>();
-					String obj = null;
+					codesList = new ArrayList<Integer>();
+					Integer obj = null;
 					for(int i = 0; i < statusArray.size(); i++) {
-						obj = statusArray.getString(i);
+						obj = statusArray.getIntValue(i);
 						codesList.add(obj);
 					}
 				}
@@ -130,7 +130,7 @@ public class DataRules implements Serializable {
 			
 			if( codesList!=null )
 			{
-				for(String obj : codesList) {
+				for(Integer obj : codesList) {
 					statusArray.add(obj);
 				}
 				json.put("data", statusArray);
