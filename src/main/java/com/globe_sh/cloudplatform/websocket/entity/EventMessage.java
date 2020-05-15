@@ -14,8 +14,10 @@ public class EventMessage implements Serializable {
 	private static final long serialVersionUID = -1355737059240580486L;
 	
 	private String dataBatchId;
-	private String station;
-	private String device;	
+	private int factory;
+	private int line;
+	private int station;
+	private int device;	
 	private int dataBlock;
 	private Timestamp decodedTime;
 	private Timestamp sampleTime;
@@ -27,16 +29,28 @@ public class EventMessage implements Serializable {
 	public void setDataBatchId(String dataBatchId) {
 		this.dataBatchId = dataBatchId;
 	}
-	public String getStation() {
+	public int getFactory() {
+		return factory;
+	}
+	public void setFactory(int factory) {
+		this.factory = factory;
+	}	
+	public int getStation() {
 		return station;
 	}
-	public void setStation(String station) {
+	public void setStation(int station) {
 		this.station = station;
 	}
-	public String getDevice() {
+	public int getLine() {
+		return line;
+	}
+	public void setLine(int line) {
+		this.line = line;
+	}	
+	public int getDevice() {
 		return device;
 	}
-	public void setDevice(String device) {
+	public void setDevice(int device) {
 		this.device = device;
 	}
 	public int getDataBlock() {
@@ -71,8 +85,10 @@ public class EventMessage implements Serializable {
 				+ ", sample_time=" + StaticMethod.getTimeString(this.sampleTime) 				
 				+ ", decoded_time=" + StaticMethod.getTimeString(0)
 				+ ", data_block=" + dataBlock 
-				+ ", device=" + device 
-				+ ", station=" + station				
+				+ ", device=" + device
+				+ ", line=" + line 
+				+ ", station=" + station
+				+ ", factory=" + factory 
 				+ "]\n";
 		
 		for(EventStatusMessage statusMessage : statusList) {
@@ -91,9 +107,11 @@ public class EventMessage implements Serializable {
 		this.dataBatchId = json.getString("data_batch_id");
 		this.sampleTime = StaticMethod.getTimestamp(json.getString("sample_time"));
 		this.decodedTime = StaticMethod.getTimestamp(json.getString("decoded_time"));
-		this.device = json.getString("device");
+		this.device = json.getIntValue("device");
 		this.dataBlock = json.getIntValue("data_block");			
-		this.station = json.getString("station");
+		this.station = json.getIntValue("station");
+		this.line = json.getIntValue("line");
+		this.factory = json.getIntValue("factory");
 		
 		JSONArray statusArray = json.getJSONArray("data");
 		statusList = new ArrayList<EventStatusMessage>();
@@ -116,6 +134,8 @@ public class EventMessage implements Serializable {
 		json.put("data_block", this.dataBlock);
 		json.put("device", this.device);
 		json.put("station", this.station);
+		json.put("station", this.line);
+		json.put("factory", this.factory);
 		
 		for(EventStatusMessage obj : statusList) {
 			statusjson = new JSONObject();
@@ -135,7 +155,8 @@ public class EventMessage implements Serializable {
 		json.put("sample_time", StaticMethod.getTimeString(this.sampleTime));
 		json.put("data_block", this.dataBlock);
 		json.put("device", this.device);
-		json.put("factory", this.station.substring(0,4).trim());
+		json.put("line", this.line);
+		json.put("factory", this.factory);
 		
 		for(EventStatusMessage obj : statusList) {
 			statusjson = new JSONObject();

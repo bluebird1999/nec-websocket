@@ -47,7 +47,7 @@ public class SessionManager {
 			}
 			else {
 				if( bean.getOperate().equals("setup") ) {
-					if( bean.getFactory().equals(null) || bean.getFactory().equals("") ) {
+					if( bean.getFactory()==0 ) {
 						bean.setStatus(2);
 					}
 					else {		
@@ -84,7 +84,7 @@ public class SessionManager {
 				List<EventStatusMessage> newEsm = new ArrayList<EventStatusMessage>();
 				
 				//only if the factory is set and equal to the message.
-				if ( dr.getFactory().equals(msg.getStation().substring(0, 4).trim() ) ) { 
+				if ( dr.getFactory() == msg.getFactory() ) { 
 					//search for the available data
 					if ( dr.getCodesList()!= null )	{							
 						List<Integer> codes = dr.getCodesList();

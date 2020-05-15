@@ -15,9 +15,10 @@ public class DataRules implements Serializable {
 	
 	private String operate;
 	private int status;				//0:unset, 1:set
-	private String factory;	
-	private String station;
-	private String device;	
+	private int factory;	
+	private int station;
+	private int line;
+	private int device;	
 	private int dataBlock;
 	private List<Integer> codesList;
 
@@ -33,22 +34,28 @@ public class DataRules implements Serializable {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public String getFactory() {
+	public int getFactory() {
 		return factory;
 	}
-	public void setFactory(String factory) {
+	public void setFactory(int factory) {
 		this.factory = factory;
 	}
-	public String getStation() {
+	public int getLine() {
+		return line;
+	}	
+	public void setLine(int line) {
+		this.line = line;
+	}	
+	public int getStation() {
 		return station;
 	}	
-	public void setStation(String station) {
+	public void setStation(int station) {
 		this.station = station;
 	}
-	public String getDevice() {
+	public int getDevice() {
 		return device;
 	}
-	public void setDevice(String device) {
+	public void setDevice(int device) {
 		this.device = device;
 	}
 	public int getDataBlock() {
@@ -70,7 +77,8 @@ public class DataRules implements Serializable {
 				+ "operate=" + operate
 				+ ", status=" + status
 				+ ", data_block=" + dataBlock 
-				+ ", device=" + device 
+				+ ", device=" + device
+				+ ", line=" + line
 				+ ", station=" + station
 				+ ", factory=" + factory
 				+ "]\n";
@@ -92,13 +100,15 @@ public class DataRules implements Serializable {
 			if( json.containsKey("operate"))
 				this.operate = json.getString("operate");
 			if( json.containsKey("device"))
-				this.device = json.getString("device");
+				this.device = json.getIntValue("device");
 			if( json.containsKey("data_block"))
 				this.dataBlock = json.getIntValue("data_block");
+			if( json.containsKey("line"))
+				this.line = json.getIntValue("line");			
 			if( json.containsKey("station"))
-				this.station = json.getString("station");
+				this.station = json.getIntValue("station");
 			if( json.containsKey("factory"))
-				this.factory = json.getString("factory");
+				this.factory = json.getIntValue("factory");
 			this.status = 0;
 			
 			if( json.containsKey("data") )
@@ -126,6 +136,7 @@ public class DataRules implements Serializable {
 			json.put("data_block", this.dataBlock);
 			json.put("device", this.device);
 			json.put("station", this.station);
+			json.put("line", this.line);
 			json.put("factory", this.factory);
 			
 			if( codesList!=null )
