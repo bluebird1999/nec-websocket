@@ -35,21 +35,6 @@
 			<artifactId>gson</artifactId>
 		</dependency> 
 		<dependency>
-		    <groupId>commons-logging</groupId>
-		    <artifactId>commons-logging</artifactId>
-		    <version>1.2</version>
-		</dependency>
-		   <dependency>
-		       <groupId>org.slf4j</groupId>
-		       <artifactId>slf4j-api</artifactId>
-		       <version>1.7.5</version>
-		   </dependency>
-		   <dependency>
-		       <groupId>org.slf4j</groupId>
-		       <artifactId>slf4j-log4j12</artifactId>
-		       <version>1.7.5</version>
-		   </dependency>	
-		<dependency>
 			<groupId>com.globe_sh.cloudplatform.common</groupId>
 			<artifactId>nec-common</artifactId>
 			<version>${nec-common.version}</version>
@@ -69,22 +54,10 @@
 		<dependency>
 		  	<groupId>org.springframework.boot</groupId>
 		  	<artifactId>spring-boot-starter</artifactId>
-		  	<exclusions>
-		    	<exclusion>
-		      		<groupId>org.springframework.boot</groupId>
-		      		<artifactId>spring-boot-starter-logging</artifactId>
-		    	</exclusion>
-		  	</exclusions>
 		</dependency>		
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 	</dependencies>
 	
@@ -129,6 +102,14 @@
 		        </includes>
 		        <filtering>false</filtering>
 	        </resource>
+            <resource>  
+                <directory>src/main/resources</directory>  
+                <includes>  
+                    <include>*.properties</include>  
+                    <include>**/*.xml</include>  
+                </includes>  
+                <filtering>false</filtering>  
+            </resource>  	        
 	    </resources>
 	</build>  
 </project>

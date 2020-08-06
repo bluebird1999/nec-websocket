@@ -5,20 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.globe_sh.cloudplatform.websocket.entity.EventMessage;
 import com.globe_sh.cloudplatform.websocket.entity.EventStatusMessage;
+
 import com.globe_sh.cloudplatform.websocket.entity.DataRules;
 
 public class SessionManager {
 
-	private static Logger logger = LogManager.getLogger(SessionManager.class);
+	private static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(SessionManager.class);
 	private static SessionManager instance;
 	private Map<String, WebSocketSession> session = new HashMap<String, WebSocketSession>();
 	private Map<String, DataRules> rules = new HashMap<String, DataRules>();

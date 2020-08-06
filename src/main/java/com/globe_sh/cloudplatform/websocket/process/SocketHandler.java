@@ -22,12 +22,13 @@ import java.lang.reflect.Type;
 
 import com.globe_sh.cloudplatform.websocket.entity.EventMessage;
 import com.globe_sh.cloudplatform.websocket.manager.SessionManager;
+import com.globe_sh.cloudplatform.websocket.message.ActiveMQListener;
 
 @Component
 public class SocketHandler extends TextWebSocketHandler {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(SocketHandler.class);
+	private static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(SocketHandler.class);
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws InterruptedException, IOException {
