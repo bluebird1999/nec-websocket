@@ -138,11 +138,15 @@ public class SessionManager {
 	
 	public void removeSession(WebSocketSession ss) {
 		logger.info("Remove session id: " + ss.getId());
-		if( session.containsKey(ss.getId()) )
+		if( session.containsKey(ss.getId()) ) {
 			session.remove(ss.getId());
+			logger.info("Removed session: " + ss.getId());
+		}
 		//add session now
-		if( rules.containsKey(ss.getId()) )
+		if( rules.containsKey(ss.getId()) ) {
+			logger.info("Removed rules: " + ss.getId());
 			rules.remove(ss.getId());
+		}
 	}	
 	
 	public void reBuildMsgMap( List<EventStatusMessage> esm) {
