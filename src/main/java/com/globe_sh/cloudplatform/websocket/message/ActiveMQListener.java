@@ -15,7 +15,7 @@ public class ActiveMQListener {
     @JmsListener(destination = "websocket-queue")
     public void listener(byte[] msg){
     	String message = new String(msg);
-        logger.info("Message received " + message);
+//        logger.info("Message received " + message);
 		
 		SessionManager.getInstance().processData(message);
     }
