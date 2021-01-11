@@ -105,7 +105,8 @@
             <resource>  
                 <directory>src/main/resources</directory>  
                 <includes>  
-                    <include>*.properties</include>  
+                    <include>*.properties</include>
+                    <include>*.jks</include>    
                     <include>**/*.xml</include>  
                 </includes>  
                 <filtering>false</filtering>  
