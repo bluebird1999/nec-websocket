@@ -69,7 +69,8 @@ public class SessionManager {
 	}
 	
 	public void processData(String newMsg) {
-		logger.info("Get new message from the server, starting the process...");		
+		logger.info("Get new message from the server, starting the process...");	
+		logger.info("Message: " + newMsg );
 		try{
 			msg = new EventMessage();
 			msg.fromJsonString(newMsg);
